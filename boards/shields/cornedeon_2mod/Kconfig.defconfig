@@ -1,0 +1,29 @@
+
+config ZMK_SPLIT
+    default y
+
+if SHIELD_CORNEDEON_2MOD_DONGLE || SHIELD_CORNEDEON_2MOD_LEFT_CENTRAL
+
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+
+config BT_MAX_CONN
+    default 7
+
+config BT_MAX_PAIRED
+    default 7
+
+config ZMK_USB
+    default y
+
+if SHIELD_CORNEDEON_2MOD_DONGLE
+config ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS
+    default 2
+endif
+
+if SHIELD_CORNEDEON_2MOD_LEFT_CENTRAL
+config ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS
+    default 1
+endif
+
+endif  # CENTRAL

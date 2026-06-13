@@ -1,0 +1,13 @@
+file_format: "1"
+id: cornedeon-2mod
+name: Cornedeon 2M
+type: shield
+url: https://github.com/alko-kbd/zmk-cornedeon-2mod/
+requires: [pro_micro]
+features:
+  - keys
+  - studio
+siblings:
+  - cornedeon_2mod_left
+  - cornedeon_2mod_right
+  - cornedeon_2mod_dongle

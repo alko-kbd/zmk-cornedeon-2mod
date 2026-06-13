@@ -1,0 +1,32 @@
+# This file generates the GitHub Actions matrix.
+# For simple board + shield combinations, add them to the top level board and
+# shield arrays, for more control, add individual board + shield combinations
+# to the `include` property. You can also use the `cmake-args` property to
+# pass flags to the build command, `snippet` to add a Zephyr snippet, and
+# `artifact-name` to assign a name to distinguish build outputs from each other:
+#
+---
+include:
+  - board: nice_nano//zmk
+    shield: cornedeon_2mod_dongle
+    snippet: studio-rpc-usb-uart
+    artifact-name: zmk_cornedeon_2mod_dongle
+#    snippet: zmk-usb-logging
+
+  - board: nice_nano//zmk
+    shield: cornedeon_2mod_left
+    snippet: studio-rpc-usb-uart
+    artifact-name: zmk_cornedeon_2mod_left
+
+#  - board: nice_nano//zmk
+#    shield: cornedeon_2mod_left_central
+#    snippet: studio-rpc-usb-uart
+#    artifact-name: zmk_cornedeon_2mod_left_central
+
+  - board: nice_nano//zmk
+    shield: cornedeon_2mod_right
+    snippet: studio-rpc-usb-uart
+    artifact-name: zmk_cornedeon_2mod_right
+
+  # - board: nice_nano//zmk
+  #   shield: settings_reset

@@ -1,0 +1,22 @@
+/*
+ * Copyright (c) 2020 Pete Johanson
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <dt-bindings/zmk/matrix_transform.h>
+#include <physical_layouts.dtsi>
+#include "cornedeon54.dtsi"
+
+/ {
+    chosen {
+        zmk,kscan = &mock_kscan;
+    };
+
+    mock_kscan: mock_kscan_0 {
+        compatible = "zmk,kscan-mock";
+        columns = <0>;
+        rows = <0>;
+        events = <0>;
+    };
+};

@@ -1,0 +1,11 @@
+config SHIELD_CORNEDEON_2MOD_DONGLE
+    def_bool $(shields_list_contains,cornedeon_2mod_dongle)
+
+config SHIELD_CORNEDEON_2MOD_LEFT
+    def_bool $(shields_list_contains,cornedeon_2mod_left)
+
+config SHIELD_CORNEDEON_2MOD_LEFT_CENTRAL
+    def_bool $(shields_list_contains,cornedeon_2mod_left_central)
+
+config SHIELD_CORNEDEON_2MOD_RIGHT
+    def_bool $(shields_list_contains,cornedeon_2mod_right)
