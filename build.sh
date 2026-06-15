@@ -5,9 +5,13 @@ KEYBOARD="cornedeon_2mod"
 BOARD="nice_nano"
 
 # Paths
-CONFIG_DIR="/workspaces/zmk/zmk-${KEYBOARD}/config"
-MODULES_DIR="/workspaces/zmk/zmk-${KEYBOARD}"
-OUTPUT_DIR="/workspaces/zmk/zmk-${KEYBOARD}/firmware"
+WORKSPACE_DIR="/workspaces/zmk"
+pushd ${WORKSPACE_DIR}
+trap "popd" EXIT
+KEYBOARD_DIR="zmk-${KEYBOARD//_/-}"
+CONFIG_DIR="${WORKSPACE_DIR}/${KEYBOARD_DIR}/config"
+MODULES_DIR="${WORKSPACE_DIR}/${KEYBOARD_DIR}"
+OUTPUT_DIR="${WORKSPACE_DIR}/${KEYBOARD_DIR}/firmware"
 
 if [ -z "$1" ]; then
     echo "X: shield name not specified."

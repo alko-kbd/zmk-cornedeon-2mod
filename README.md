@@ -14,10 +14,10 @@ Prepare build environvent (devcontainer) as described in ZMK docs.
 
 ~# cd zmk-workspace/zmk
 
-~zmk-workspace/zmk# git clone https://github.com/alko-kbd/zmk-cornedeon54
+~zmk-workspace/zmk# git clone https://github.com/alko-kbd/zmk-cornedeon-2mod
 
 ~zmk-workspace/zmk# cd ..
 
 ~zmk-workspace$ devcontainer exec --workspace-folder ./zmk /bin/bash
 
-#workspaces/zmk# ./zmk-cornedeon54/build.sh <dongle|left|right|left_central>
+#workspaces/zmk# ./zmk-cornedeon-2mod/build.sh <dongle|left|right|left_central>

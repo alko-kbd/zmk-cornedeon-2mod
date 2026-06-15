@@ -27,3 +27,8 @@ config ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS
 endif
 
 endif  # CENTRAL
+
+if SHIELD_CORNEDEON_2MOD_RIGHT
+config SPI
+    default y
+endif

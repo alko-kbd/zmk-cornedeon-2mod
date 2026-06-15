@@ -6,7 +6,7 @@
 
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <physical_layouts.dtsi>
-#include "cornedeon54.dtsi"
+#include "cornedeon_2mod.dtsi"
 
 / {
     chosen {
