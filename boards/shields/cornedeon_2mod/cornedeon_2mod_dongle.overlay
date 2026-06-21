@@ -20,3 +20,11 @@
         events = <0>;
     };
 };
+
+&glidepoint_listener {
+    status = "okay";
+};
+
+&analog_input_listener {
+    status = "okay";
+};

@@ -1,1 +1,69 @@
 #include "cornedeon_2mod.dtsi"
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <input/processors.dtsi>
+
+/ {
+    kscan0: kscan {
+        row-gpios
+            = <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&pro_micro 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&pro_micro 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            ;
+
+        col-gpios
+            = <&pro_micro 9 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 8 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 7 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 6 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 5 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 4 GPIO_ACTIVE_HIGH>
+            ;
+    };
+};
+
+&adc {
+	status = "okay";
+};
+
+/ {
+	ain0: analog_input_0 {
+		compatible = "zmk,analog-input";
+		sampling-hz = <100>;
+		x-ch {
+			io-channels = <&adc 0>; // P0.02/D19 <--- see ain-map.png for nRF52840
+			mv-mid = <1630>;
+			mv-min-max = <1600>;
+			mv-deadzone = <100>;
+			scale-multiplier = <1>;
+			scale-divisor = <50>;
+			evt-type = <INPUT_EV_REL>;
+			input-code = <INPUT_REL_X>;
+		};
+		y-ch {
+			io-channels = <&adc 5>; // P0.29/D20 <--- see ain-map.png for nRF52840
+			mv-mid = <1668>;
+			mv-min-max = <1600>;
+			mv-deadzone = <100>;
+			scale-multiplier = <1>;
+			scale-divisor = <50>;
+			evt-type = <INPUT_EV_REL>;
+			input-code = <INPUT_REL_Y>;
+
+			/* enable report mdoe for gamepad axix or knob */
+			/* to only call input_report on quantquantized value is updated */
+			/* NOTE: mouse input does NOT need this */
+			//report-on-change-only;
+
+		};
+	};
+
+    analog_input_listener {
+        status = "okay";
+        compatible = "zmk,input-listener";
+        device = <&ain0>;
+        //input-processors = <&zip_xy_to_scroll_mapper>;                 // acts as a scroll wheel
+        //input-processors = <&zip_xy_transform>;  // acts as mouse
+    };
+};

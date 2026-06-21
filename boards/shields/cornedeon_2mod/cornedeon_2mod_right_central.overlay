@@ -86,7 +86,8 @@
     };
 };
 
-&glidepoint_split {
-	status = "okay";
-	device = <&glidepoint>;
+&glidepoint_listener {
+    status = "okay";
+    device = <&glidepoint>;
 };
+

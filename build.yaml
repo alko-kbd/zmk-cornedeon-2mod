@@ -29,4 +29,9 @@ include:
     artifact-name: zmk_cornedeon_2mod_right
 
   # - board: nice_nano//zmk
+  #   shield: cornedeon_2mod_right_central
+  #   snippet: studio-rpc-usb-uart
+  #   artifact-name: zmk_cornedeon_2mod_right_central
+
+  # - board: nice_nano//zmk
   #   shield: settings_reset

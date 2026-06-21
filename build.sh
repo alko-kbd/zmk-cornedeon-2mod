@@ -2,7 +2,7 @@
 
 # Keyboard name
 KEYBOARD="cornedeon_2mod"
-BOARD="nice_nano"
+BOARD="nice_nano//zmk"
 
 # Paths
 WORKSPACE_DIR="/workspaces/zmk"
@@ -10,7 +10,7 @@ pushd ${WORKSPACE_DIR}
 trap "popd" EXIT
 KEYBOARD_DIR="zmk-${KEYBOARD//_/-}"
 CONFIG_DIR="${WORKSPACE_DIR}/${KEYBOARD_DIR}/config"
-MODULES_DIR="${WORKSPACE_DIR}/${KEYBOARD_DIR}"
+MODULES_DIR="${WORKSPACE_DIR}/${KEYBOARD_DIR};${WORKSPACE_DIR}/cirque-input-module;${WORKSPACE_DIR}/zmk-analog-input-driver"
 OUTPUT_DIR="${WORKSPACE_DIR}/${KEYBOARD_DIR}/firmware"
 
 if [ -z "$1" ]; then

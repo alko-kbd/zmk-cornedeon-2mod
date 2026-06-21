@@ -6,6 +6,7 @@ url: https://github.com/alko-kbd/zmk-cornedeon-2mod/
 requires: [pro_micro]
 features:
   - keys
+  - pointer
   - studio
 siblings:
   - cornedeon_2mod_left

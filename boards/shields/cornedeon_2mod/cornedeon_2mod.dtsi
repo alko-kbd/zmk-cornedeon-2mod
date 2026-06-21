@@ -6,6 +6,8 @@
 
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <physical_layouts.dtsi>
+#include <input/processors.dtsi>
+
 
 / {
     chosen {
@@ -19,11 +21,11 @@
         diode-direction = "col2row";
 
         row-gpios
-            = <&pro_micro 21 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&pro_micro 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&pro_micro 19 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            = <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             , <&pro_micro 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&pro_micro 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             ;
 
         col-gpios
@@ -115,4 +117,38 @@ RC(4,0) RC(4,1) RC(4,2) RC(4,3) RC(4,4)
         >;
     };
 
+};
+
+/ {
+	split_inputs {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		
+		glidepoint_split: glidepoint_split@0 {
+			compatible = "zmk,input-split";
+            status = "disabled";
+    		reg = <0>;
+		};
+
+        analog_input_split: analog_input_split@1 {
+			compatible = "zmk,input-split";
+            status = "disabled";
+			reg = <1>;
+        };
+
+	};
+
+    glidepoint_listener: glidepoint_listener {
+        compatible = "zmk,input-listener";
+        status = "disabled";
+        device = <&glidepoint_split>;
+    };
+
+    analog_input_listener: analog_input_listener {
+        compatible = "zmk,input-listener";
+        status = "disabled";
+        device = <&analog_input_split>;
+        input-processors = <&zip_xy_to_scroll_mapper>;                 // acts as a scroll wheel
+        //input-processors = <&zip_xy_transform>;
+    };
 };

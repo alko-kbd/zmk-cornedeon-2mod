@@ -9,3 +9,6 @@ config SHIELD_CORNEDEON_2MOD_LEFT_CENTRAL
 
 config SHIELD_CORNEDEON_2MOD_RIGHT
     def_bool $(shields_list_contains,cornedeon_2mod_right)
+
+config SHIELD_CORNEDEON_2MOD_RIGHT_CENTRAL
+    def_bool $(shields_list_contains,cornedeon_2mod_right_central)
