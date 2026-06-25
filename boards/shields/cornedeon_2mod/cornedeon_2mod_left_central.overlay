@@ -63,7 +63,7 @@
         status = "okay";
         compatible = "zmk,input-listener";
         device = <&ain0>;
-        //input-processors = <&zip_xy_to_scroll_mapper>;                 // acts as a scroll wheel
+        input-processors = <&zip_xy_to_scroll_mapper>;                 // acts as a scroll wheel
         //input-processors = <&zip_xy_transform>;  // acts as mouse
     };
 };

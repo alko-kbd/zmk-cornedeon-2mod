@@ -21,10 +21,10 @@
     };
 };
 
-&glidepoint_listener {
+&analog_input_listener {
     status = "okay";
 };
 
-&analog_input_listener {
+&glidepoint_listener {
     status = "okay";
 };

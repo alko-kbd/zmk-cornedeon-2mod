@@ -49,7 +49,6 @@
     pinctrl-1 = <&spi0_sleep>;
     pinctrl-names = "default", "sleep";
     
-    /* Пин CS назначается здесь */
     cs-gpios = <&pro_micro 8 GPIO_ACTIVE_LOW>; 
 
     glidepoint: glidepoint@0 {

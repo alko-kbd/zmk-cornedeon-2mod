@@ -2,25 +2,22 @@
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <input/processors.dtsi>
 
-/ {
-    kscan0: kscan {
-        row-gpios
-            = <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&pro_micro 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&pro_micro 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            ;
+&kscan0 {
+	row-gpios
+		= <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+		, <&pro_micro 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+		, <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+		, <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+		;
 
-        col-gpios
-            = <&pro_micro 9 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 8 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 7 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 6 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 5 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 4 GPIO_ACTIVE_HIGH>
-            ;
-    };
+	col-gpios
+		= <&pro_micro 8 GPIO_ACTIVE_HIGH>
+		, <&pro_micro 7 GPIO_ACTIVE_HIGH>
+		, <&pro_micro 6 GPIO_ACTIVE_HIGH>
+		, <&pro_micro 5 GPIO_ACTIVE_HIGH>
+		, <&pro_micro 4 GPIO_ACTIVE_HIGH>
+		, <&pro_micro 3 GPIO_ACTIVE_HIGH>
+		;
 };
 
 &adc {
@@ -50,17 +47,15 @@
 			scale-divisor = <50>;
 			evt-type = <INPUT_EV_REL>;
 			input-code = <INPUT_REL_Y>;
-
-			/* enable report mdoe for gamepad axix or knob */
-			/* to only call input_report on quantquantized value is updated */
-			/* NOTE: mouse input does NOT need this */
-			//report-on-change-only;
-
+			invert;
 		};
 	};
 };
 
 &analog_input_split {
-    status = "okay";
     device = <&ain0>;
+};
+
+&glidepoint_split {
+    status = "disabled";
 };

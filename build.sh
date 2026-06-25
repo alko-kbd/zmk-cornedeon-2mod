@@ -10,7 +10,7 @@ pushd ${WORKSPACE_DIR}
 trap "popd" EXIT
 KEYBOARD_DIR="zmk-${KEYBOARD//_/-}"
 CONFIG_DIR="${WORKSPACE_DIR}/${KEYBOARD_DIR}/config"
-MODULES_DIR="${WORKSPACE_DIR}/${KEYBOARD_DIR};${WORKSPACE_DIR}/cirque-input-module;${WORKSPACE_DIR}/zmk-analog-input-driver"
+MODULES_DIR="${WORKSPACE_DIR}/${KEYBOARD_DIR};${WORKSPACE_DIR}/ext/cirque-input-module;${WORKSPACE_DIR}/ext/zmk-analog-input-driver;${WORKSPACE_DIR}/ext/zmk-split-peripheral-input-relay"
 OUTPUT_DIR="${WORKSPACE_DIR}/${KEYBOARD_DIR}/firmware"
 
 if [ -z "$1" ]; then
