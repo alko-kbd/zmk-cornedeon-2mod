@@ -1,6 +1,5 @@
 #include "cornedeon_2mod.dtsi"
 #include <zephyr/dt-bindings/input/input-event-codes.h>
-#include <input/processors.dtsi>
 
 &kscan0 {
 	row-gpios
@@ -20,42 +19,11 @@
 		;
 };
 
-&adc {
-	status = "okay";
+
+&joystick_split {
+    status = "disabled";
 };
 
-/ {
-	ain0: analog_input_0 {
-		compatible = "zmk,analog-input";
-		sampling-hz = <100>;
-		x-ch {
-			io-channels = <&adc 0>; // P0.02/D19 <--- see ain-map.png for nRF52840
-			mv-mid = <1630>;
-			mv-min-max = <1600>;
-			mv-deadzone = <100>;
-			scale-multiplier = <1>;
-			scale-divisor = <50>;
-			evt-type = <INPUT_EV_REL>;
-			input-code = <INPUT_REL_X>;
-		};
-		y-ch {
-			io-channels = <&adc 5>; // P0.29/D20 <--- see ain-map.png for nRF52840
-			mv-mid = <1668>;
-			mv-min-max = <1600>;
-			mv-deadzone = <100>;
-			scale-multiplier = <1>;
-			scale-divisor = <50>;
-			evt-type = <INPUT_EV_REL>;
-			input-code = <INPUT_REL_Y>;
-			invert;
-		};
-	};
-};
-
-&analog_input_split {
-    device = <&ain0>;
-};
-
-&glidepoint_split {
+&trackpad_split {
     status = "disabled";
 };

@@ -7,8 +7,10 @@ requires: [pro_micro]
 features:
   - keys
   - pointer
+  - joystick
+  - trackpad
   - studio
 siblings:
-  - cornedeon_2mod_left
-  - cornedeon_2mod_right
+  - cornedeon_2mod_left_joy
+  - cornedeon_2mod_right_tps43
   - cornedeon_2mod_dongle

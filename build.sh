@@ -10,7 +10,9 @@ pushd ${WORKSPACE_DIR}
 trap "popd" EXIT
 KEYBOARD_DIR="zmk-${KEYBOARD//_/-}"
 CONFIG_DIR="${WORKSPACE_DIR}/${KEYBOARD_DIR}/config"
-MODULES_DIR="${WORKSPACE_DIR}/${KEYBOARD_DIR};${WORKSPACE_DIR}/ext/cirque-input-module;${WORKSPACE_DIR}/ext/zmk-analog-input-driver;${WORKSPACE_DIR}/ext/zmk-split-peripheral-input-relay"
+MODULES_DIR="${WORKSPACE_DIR}/${KEYBOARD_DIR};${WORKSPACE_DIR}/ext/zmk-driver-azoteq-iqs5xx;${WORKSPACE_DIR}/ext/zmk-analog-input-driver;${WORKSPACE_DIR}/ext/zmk-input-processor-keybind"
+#MODULES_DIR="${WORKSPACE_DIR}/${KEYBOARD_DIR};${WORKSPACE_DIR}/ext/cirque-input-module;${WORKSPACE_DIR}/ext/zmk-analog-input-driver"
+#MODULES_DIR="${WORKSPACE_DIR}/${KEYBOARD_DIR};${WORKSPACE_DIR}/ext/zmk-analog-input-driver;${WORKSPACE_DIR}/ext/kb_zmk_ps2_mouse_trackpoint_driver"
 OUTPUT_DIR="${WORKSPACE_DIR}/${KEYBOARD_DIR}/firmware"
 
 if [ -z "$1" ]; then

@@ -2,20 +2,39 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: nxtkb
-      url-base: https://github.com/nxtkb
+    # - name: nxtkb
+    #   url-base: https://github.com/nxtkb
+    - name: AYM1607
+      url-base: https://github.com/AYM1607
     - name: badjeff
       url-base: https://github.com/badjeff
+    - name: zettaface
+      url-base: https://github.com/zettaface
+ #   - name: infused-kim
+ #     url-base: https://github.com/infused-kim
   projects:
     - name: zmk
       remote: zmkfirmware
       revision: main
       import: app/west.yml
-    - name: cirque-input-module
-      remote: nxtkb
+    # - name: cirque-input-module
+    #   remote: nxtkb
+    #   revision: main
+    - name: zmk-driver-azoteq-iqs5xx
+      remote: AYM1607
       revision: main
     - name: zmk-analog-input-driver
       remote: badjeff
       revision: main
+    - name: zmk-input-processor-keybind
+      remote: zettaface
+      revision: main
+#    - name: zmk
+#      remote: infused-kim
+#      revision: pr-testing/mouse_ps2_module_base
+#      import: app/west.yml
+#    - name: kb_zmk_ps2_mouse_trackpoint_driver
+#      remote: infused-kim
+#      revision: main
   self:
     path: config

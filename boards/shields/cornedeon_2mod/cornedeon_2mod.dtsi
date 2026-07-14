@@ -21,19 +21,19 @@
         diode-direction = "col2row";
 
         row-gpios
-            = <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&pro_micro 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            = <&pro_micro 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&pro_micro 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&pro_micro 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&pro_micro 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             ;
 
         col-gpios
-            = <&pro_micro 9 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 8 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 7 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 6 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 5 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 4 GPIO_ACTIVE_HIGH>
+            = <&pro_micro 14 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 15 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 18 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 19 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 20 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 21 GPIO_ACTIVE_HIGH>
             ;
     };
 
@@ -114,34 +114,33 @@ RC(3,0) RC(3,1) RC(3,2) RC(3,3) RC(3,4) RC(3,5)  RC(3,6) RC(3,7) RC(3,8) RC(3,9)
 
 };
 
-/{
+/ {
     split_inputs {
         #address-cells = <1>;
         #size-cells = <0>;
 
-        analog_input_split: analog_input@0 {
+        joystick_split: joystick_split@0 {
             compatible = "zmk,input-split";
             reg = <0>;
             status = "okay";
         };
 
-        glidepoint_split: glidepoint@0 {
+        trackpad_split: trackpad_split@1 {
             compatible = "zmk,input-split";
             reg = <1>;
             status = "okay";
         };
     };
 
-    analog_input_listener: analog_input_listener {
+    joystick_listener: joystick_listener {
         compatible = "zmk,input-listener";
         status = "disabled";
-        device = <&analog_input_split>;
-        input-processors = <&zip_xy_to_scroll_mapper>;
+        device = <&joystick_split>;
     };
 
-    glidepoint_listener: glidepoint_listener {
+    trackpad_listener: trackpad_listener {
         compatible = "zmk,input-listener";
         status = "disabled";
-        device = <&glidepoint_split>;
+        device = <&trackpad_split>;
     };
 };

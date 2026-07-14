@@ -1,11 +1,6 @@
-/*
- * Copyright (c) 2020 Pete Johanson
- *
- * SPDX-License-Identifier: MIT
- */
-
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <physical_layouts.dtsi>
+#include <input/processors/zmk-input-processor-keybind.dtsi>
 #include "cornedeon_2mod.dtsi"
 
 / {
@@ -19,12 +14,36 @@
         rows = <0>;
         events = <0>;
     };
+
+    // X/Y -> WASD converter
+    // mode 1 = 4-directional
+    zip_wasd: zip_wasd {
+        compatible = "zmk,input-processor-keybind";
+        #input-processor-cells = <0>;
+        track_remainders;
+        mode = <1>;
+        // R L U D
+        bindings = <&kp D>, <&kp A>, <&kp W>, <&kp S>;
+        tick = <40>;
+        wait-ms = <0>;
+        tap-ms = <10>;
+    };
 };
 
-&analog_input_listener {
+// ZMK patch from zettaface:
+// app/src/pointing/input_listener.c -> filter_with_input_config() -> return 0; -> return ret;
+&joystick_listener {
     status = "okay";
+    normal_mode {
+        layers = <4 5 6 7 8 9 10 11>; 
+        input-processors = <&zip_wasd>;
+    };
+    scroll_mode {
+        layers = <0 1 2 3>;
+        input-processors = <&zip_xy_to_scroll_mapper>;
+    };
 };
 
-&glidepoint_listener {
+&trackpad_listener {
     status = "okay";
 };
