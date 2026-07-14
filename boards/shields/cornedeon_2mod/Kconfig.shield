@@ -2,25 +2,13 @@ config SHIELD_CORNEDEON_2MOD_DONGLE
     def_bool $(shields_list_contains,cornedeon_2mod_dongle)
 
 config SHIELD_CORNEDEON_2MOD_LEFT
-    def_bool $(shields_list_contains,cornedeon_2mod_left)
-
-config SHIELD_CORNEDEON_2MOD_LEFT
-    def_bool $(shields_list_contains,cornedeon_2mod_left_joy)
+    def_bool $(shields_list_contains,cornedeon_2mod_left) || $(shields_list_contains,cornedeon_2mod_left_joy)
 
 config SHIELD_CORNEDEON_2MOD_LEFT_CENTRAL
     def_bool $(shields_list_contains,cornedeon_2mod_left_joy_central)
 
 config SHIELD_CORNEDEON_2MOD_RIGHT
-    def_bool $(shields_list_contains,cornedeon_2mod_right)
-
-config SHIELD_CORNEDEON_2MOD_RIGHT
-    def_bool $(shields_list_contains,cornedeon_2mod_right_tps43)
+    def_bool $(shields_list_contains,cornedeon_2mod_right) || $(shields_list_contains,cornedeon_2mod_right_tps43)
 
 config SHIELD_CORNEDEON_2MOD_RIGHT_CENTRAL
-    def_bool $(shields_list_contains,cornedeon_2mod_right_central)
-
-config SHIELD_CORNEDEON_2MOD_RIGHT_CENTRAL
-    def_bool $(shields_list_contains,cornedeon_2mod_right_tps43_central)
-
-config SHIELD_CORNEDEON_2MOD_RIGHT_CENTRAL
-    def_bool $(shields_list_contains,cornedeon_2mod_right_tp_central)
+    def_bool $(shields_list_contains,cornedeon_2mod_right_central) || $(shields_list_contains,cornedeon_2mod_right_tps43_central)

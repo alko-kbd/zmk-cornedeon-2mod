@@ -88,6 +88,6 @@
     device = <&tps43>;
 };
 
-&analog_input_listener {
+&joystick_listener {
     status = "okay";
 };
