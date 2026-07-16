@@ -19,8 +19,51 @@
 		;
 };
 
+/ {
+    // switch battery sensor to bvd
+    chosen {  
+        zmk,battery = &vbatt;
+    };
+
+    vbatt: vbatt {
+        compatible = "zmk,battery-voltage-divider";
+        io-channels = <&adc 2>;
+        output-ohms = <100000>;
+        full-ohms = <250000>;
+    };
+};
+
 &adc {
 	status = "okay";
+    #address-cells = <1>;
+    #size-cells = <0>;
+
+    channel@2 {                                    // bvd
+        reg = <2>;
+        zephyr,gain = "ADC_GAIN_1_6";
+        zephyr,reference = "ADC_REF_INTERNAL";
+        zephyr,acquisition-time = <ADC_ACQ_TIME(ADC_ACQ_TIME_MICROSECONDS, 40)>;
+        zephyr,input-positive = <NRF_SAADC_AIN2>;
+        zephyr,resolution = <12>;
+    };
+
+    channel@0 {
+        reg = <0>;
+        zephyr,gain = "ADC_GAIN_1_6";
+        zephyr,reference = "ADC_REF_INTERNAL";
+        zephyr,acquisition-time = <ADC_ACQ_TIME_DEFAULT>;
+        zephyr,input-positive = <NRF_SAADC_AIN0>;
+        zephyr,resolution = <12>;
+    };
+
+    channel@5 {
+        reg = <5>;
+        zephyr,gain = "ADC_GAIN_1_6";
+        zephyr,reference = "ADC_REF_INTERNAL";
+        zephyr,acquisition-time = <ADC_ACQ_TIME_DEFAULT>;
+        zephyr,input-positive = <NRF_SAADC_AIN5>;
+        zephyr,resolution = <12>;
+    };
 };
 
 / {
@@ -28,7 +71,7 @@
 		compatible = "zmk,analog-input";
 		sampling-hz = <20>;
 		x-ch {
-			io-channels = <&adc 0>; // P0.02/D19 <--- see ain-map.png for nRF52840
+			io-channels = <&adc 0>; // P0.02/D19
 			mv-mid = <1630>;
 			mv-min-max = <1600>;
 			mv-deadzone = <100>;
@@ -38,7 +81,7 @@
 			input-code = <INPUT_REL_X>;
 		};
 		y-ch {
-			io-channels = <&adc 5>; // P0.29/D20 <--- see ain-map.png for nRF52840
+			io-channels = <&adc 5>; // P0.29/D20
 			mv-mid = <1668>;
 			mv-min-max = <1600>;
 			mv-deadzone = <100>;

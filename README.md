@@ -6,7 +6,7 @@ Keyboard Maintainer: [alko](https://github.com/alko-kbd/zmk-cornedeon-2mod) [alk
 
 Web Site: [cornedeon.ru](https://cornedeon.ru)
 
-![Cornedeon_2mod](pics/2_right_s.jpg)
+![Cornedeon_2mod](pics/1_over.jpg)
 
 ## Local build
 
@@ -20,4 +20,4 @@ Prepare build environvent (devcontainer) as described in ZMK docs.
 
 ~zmk-workspace$ devcontainer exec --workspace-folder ./zmk /bin/bash
 
-#workspaces/zmk# ./zmk-cornedeon-2mod/build.sh <dongle|left|right|left_central>
+#workspaces/zmk# ./zmk-cornedeon-2mod/build.sh <dongle|left|left_joy|right_tps43|right_tps43_central>
