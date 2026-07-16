@@ -6,7 +6,7 @@ Keyboard Maintainer: [alko](https://github.com/alko-kbd/zmk-cornedeon-2mod) [alk
 
 Web Site: [cornedeon.ru](https://cornedeon.ru)
 
-![Cornedeon_2mod](pics/1_over.jpg)
+![Cornedeon_2mod](pics/1_over_dk.jpg)
 
 ## Local build
 
