@@ -6,10 +6,12 @@ manifest:
     #   url-base: https://github.com/nxtkb
     - name: AYM1607
       url-base: https://github.com/AYM1607
-    - name: badjeff
-      url-base: https://github.com/badjeff
+    # - name: badjeff
+    #   url-base: https://github.com/badjeff
     - name: zettaface
       url-base: https://github.com/zettaface
+    - name: alko
+      url-base: https://github.com/alko-kbd
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -22,7 +24,8 @@ manifest:
       remote: AYM1607
       revision: main
     - name: zmk-analog-input-driver
-      remote: badjeff
+      # remote: badjeff
+      remote: alko
       revision: main
     - name: zmk-input-processor-keybind
       remote: zettaface

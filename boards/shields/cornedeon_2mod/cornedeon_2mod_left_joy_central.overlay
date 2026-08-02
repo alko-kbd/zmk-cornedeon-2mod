@@ -1,0 +1,135 @@
+#include "cornedeon_2mod.dtsi"
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <input/processors/zmk-input-processor-keybind.dtsi>
+
+
+&kscan0 {
+	row-gpios
+		= <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+		, <&pro_micro 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+		, <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+		, <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+		;
+
+	col-gpios
+		= <&pro_micro 8 GPIO_ACTIVE_HIGH>
+		, <&pro_micro 7 GPIO_ACTIVE_HIGH>
+		, <&pro_micro 6 GPIO_ACTIVE_HIGH>
+		, <&pro_micro 5 GPIO_ACTIVE_HIGH>
+		, <&pro_micro 4 GPIO_ACTIVE_HIGH>
+		, <&pro_micro 3 GPIO_ACTIVE_HIGH>
+		;
+};
+
+/ {
+    // switch battery sensor to bvd
+    chosen {  
+        zmk,battery = &vbatt;
+    };
+
+    vbatt: vbatt {
+        compatible = "zmk,battery-voltage-divider";
+        io-channels = <&adc 2>;
+        output-ohms = <100000>;
+        full-ohms = <250000>;
+    };
+
+    // X/Y -> WASD converter
+    // mode 1 = 4-directional
+    zip_wasd: zip_wasd {
+        compatible = "zmk,input-processor-keybind";
+        #input-processor-cells = <0>;
+        track_remainders;
+        mode = <1>;
+        // R L D U
+        bindings = <&kp D>, <&kp A>, <&kp S>, <&kp W>;
+        tick = <40>;
+        wait-ms = <0>;
+        tap-ms = <10>;
+    };
+
+};
+
+&adc {
+	status = "okay";
+    #address-cells = <1>;
+    #size-cells = <0>;
+
+    channel@2 {                                    // bvd
+        reg = <2>;
+        zephyr,gain = "ADC_GAIN_1_6";
+        zephyr,reference = "ADC_REF_INTERNAL";
+        zephyr,acquisition-time = <ADC_ACQ_TIME(ADC_ACQ_TIME_MICROSECONDS, 40)>;
+        zephyr,input-positive = <NRF_SAADC_AIN2>;
+        zephyr,resolution = <12>;
+    };
+
+    channel@0 {
+        reg = <0>;
+        zephyr,gain = "ADC_GAIN_1_6";
+        zephyr,reference = "ADC_REF_INTERNAL";
+        zephyr,acquisition-time = <ADC_ACQ_TIME_DEFAULT>;
+        zephyr,input-positive = <NRF_SAADC_AIN0>;
+        zephyr,resolution = <12>;
+    };
+
+    channel@5 {
+        reg = <5>;
+        zephyr,gain = "ADC_GAIN_1_6";
+        zephyr,reference = "ADC_REF_INTERNAL";
+        zephyr,acquisition-time = <ADC_ACQ_TIME_DEFAULT>;
+        zephyr,input-positive = <NRF_SAADC_AIN5>;
+        zephyr,resolution = <12>;
+    };
+};
+
+/ {
+	ain0: analog_input_0 {
+		compatible = "zmk,analog-input";
+		sampling-hz = <20>;
+		x-ch {
+			io-channels = <&adc 0>; // P0.02/D19
+			mv-mid = <1630>;
+            auto-calibrate;
+			mv-min-max = <1600>;
+			mv-deadzone = <100>;
+			scale-multiplier = <1>;
+			scale-divisor = <50>;
+			evt-type = <INPUT_EV_REL>;
+			input-code = <INPUT_REL_X>;
+		};
+		y-ch {
+			io-channels = <&adc 5>; // P0.29/D20
+			mv-mid = <1668>;
+            auto-calibrate;
+			mv-min-max = <1600>;
+			mv-deadzone = <100>;
+			scale-multiplier = <1>;
+			scale-divisor = <50>;
+			evt-type = <INPUT_EV_REL>;
+			input-code = <INPUT_REL_Y>;
+			invert;
+		};
+	};
+};
+
+&joystick_split {
+    status = "disabled";
+};
+
+&joystick_listener {
+    status = "okay";
+    device = <&ain0>;
+    // normal_mode {
+    //     layers = <4 5 6 7 8 9 10 11>; 
+    //     input-processors = <&zip_wasd>;
+    // };
+    // scroll_mode {
+    //     layers = <0 1 2 3>;
+    //     input-processors = <&zip_xy_to_scroll_mapper>;
+    // };
+};
+
+&trackpad_listener {
+    status = "okay";
+};

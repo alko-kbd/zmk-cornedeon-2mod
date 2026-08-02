@@ -23,7 +23,9 @@ SHIELD="${KEYBOARD}_$1"
 
 echo "=== Build: ${SHIELD} ==="
 
-west build -s app -p -b ${BOARD} -S studio-rpc-usb-uart -- \
+#  -S zmk-usb-logging \
+west build -s app -p -b ${BOARD} -S studio-rpc-usb-uart \
+  -- \
   -DSHIELD="$SHIELD" \
   -DZMK_CONFIG="$CONFIG_DIR" \
   -DZMK_EXTRA_MODULES="$MODULES_DIR" \
