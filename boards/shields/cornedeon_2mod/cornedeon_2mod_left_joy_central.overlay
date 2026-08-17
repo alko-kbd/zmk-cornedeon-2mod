@@ -108,7 +108,6 @@
 			scale-divisor = <50>;
 			evt-type = <INPUT_EV_REL>;
 			input-code = <INPUT_REL_Y>;
-			invert;
 		};
 	};
 };
@@ -120,14 +119,14 @@
 &joystick_listener {
     status = "okay";
     device = <&ain0>;
-    // normal_mode {
-    //     layers = <4 5 6 7 8 9 10 11>; 
-    //     input-processors = <&zip_wasd>;
-    // };
-    // scroll_mode {
-    //     layers = <0 1 2 3>;
-    //     input-processors = <&zip_xy_to_scroll_mapper>;
-    // };
+    wasd_mode {
+        layers = <3>; 
+        input-processors = <&zip_wasd>;
+    };
+    scroll_mode {
+        layers = <1 2>;
+        input-processors = <&zip_xy_to_scroll_mapper>;
+    };
 };
 
 &trackpad_listener {
